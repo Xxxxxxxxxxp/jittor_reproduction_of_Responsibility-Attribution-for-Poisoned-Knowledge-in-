@@ -22,3 +22,24 @@ export OPENAI_API_URL="YOUR_OPENAI_BASE_URL"
 
 ## 最终复现结果测试
 (在复现中的proxy_model中为了提高复现效率并适配主流科研环境的硬件约束，本项目使用轻量化复现方案。考虑到$8B$级别模型对显存的高要求，我们通过使用3B，1B等模型替代了原论文中的大参数代理模型。实验证明，该替代方案在保持归因准确率（DACC）的同时，显著降低了推理延迟和算力准入门槛)
+实验结果 1，在judge_LLM不变的情况(恒为gpt-4-mini)下改变proxy_LLM
+| DACC | Llama-3.2-1B-Instruct |Llama-3.2-3B-Instruct|gpt-4o-mini_Qwen2.5-0.5B-Instruct|gpt-4o-mini_Qwen2.5-1.5B-Instruct|gpt-4o-mini_Qwen2.5-3B-Instruct|
+|--------|--------|--------|--------|
+| Pytorch  | 0.9668508287292817  |   |0.9936046511627907|0.998|0.9975460122699387|
+| Jittor | 0.99  |0.993  |0.991|0.995|0.986|
+| 作者原代码 | 0.99  | 1.00  |0.99|0.99|0.99|
+
+
+| FPR | Llama-3.2-1B-Instruct |Llama-3.2-3B-Instruct|gpt-4o-mini_Qwen2.5-0.5B-Instruct|gpt-4o-mini_Qwen2.5-1.5B-Instruct|gpt-4o-mini_Qwen2.5-3B-Instruct|
+|--------|--------|--------|--------|
+| Pytorch  | 0.04580152671755725  |   |0.00819672131147541|0.004|0.0035398230088495575|
+| Jittor | 0.02  | 0.014 |0.018|0.001|0.028|
+| 作者原代码 | 0.01  | 0.0  |0.01|0.01|0.01|
+
+
+
+| FNR | Llama-3.2-1B-Instruct |Llama-3.2-3B-Instruct|gpt-4o-mini_Qwen2.5-0.5B-Instruct|gpt-4o-mini_Qwen2.5-1.5B-Instruct|gpt-4o-mini_Qwen2.5-3B-Instruct|
+|--------|--------|--------|--------|
+| Pytorch  | 0.0  |   |0.002|0.0|0.0|
+| Jittor | 0.0  | 0.0  |0.0|0.0|0.0|
+| 作者原代码 | 0.0  | 0.0  |0.0|0.0|0.0|
