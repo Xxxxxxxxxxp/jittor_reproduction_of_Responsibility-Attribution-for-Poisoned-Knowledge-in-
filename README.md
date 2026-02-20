@@ -18,10 +18,10 @@ export OPENAI_API_URL="YOUR_OPENAI_BASE_URL"
 ```
 3.配置环境时，请尽量避免jittor与pytorch混装，以防numpy等库和两种框架的兼容性问题
 ## 攻击数据收集
-为了确保本次复现实验具有高度的可追溯性与横向可比性，以及考虑到知识中毒攻击（Knowledge Poisoning）样本具有一定的敏感性，我们严格遵循了原论文所采用的标准基准数据集。通过引用已验证的公开攻击样本，旨在消除数据分布差异对实验结果带来的随机干扰，从而在统一的基准线上更客观地验证 RAGOrigin 框架在责任归因方面的核心效能
+为了确保本次复现实验具有高度的可追溯性与横向可比性，以及考虑到知识中毒攻击（Knowledge Poisoning）样本具有一定的敏感性，我们严格遵循了原论文所采用的公开的标准基准数据集(即dataset "NQ"，attack_retriever "e5"attack_LLM "gpt-4o-mini" ，judge_LLM "gpt-4o-mini" ，attack_method "PRAGB" ，attack_M 5 ，top_K 5 )。通过引用已验证的公开攻击样本，旨在消除数据分布差异对实验结果带来的随机干扰，从而在统一的基准线上更客观地验证 RAGOrigin 框架在责任归因方面的核心效能
 
 ## 最终复现结果测试
-(在复现中的proxy_model中为了提高复现效率并适配主流科研环境的硬件约束，本项目使用轻量化复现方案。考虑到$8B$级别模型对显存的高要求，我们通过使用3B，1B等模型替代了原论文中的大参数代理模型。实验证明，该替代方案在保持归因准确率（DACC）的同时，显著降低了推理延迟和算力准入门槛)
+(在复现中的proxy_model中为了提高复现效率并适配主流科研环境的硬件约束，本项目使用轻量化复现方案。考虑到8B级别模型对显存的高要求，我们通过使用3B，1B等模型替代了原论文中的大参数代理模型。实验证明，该替代方案在保持归因准确率（DACC）的同时，显著降低了推理延迟和算力准入门槛)
 \\
 实验结果 1，在judge_LLM不变的情况(恒为gpt-4-mini)下改变proxy_LLM
 | DACC | Llama-3.2-1B-Instruct |Llama-3.2-3B-Instruct|Qwen2.5-0.5B-Instruct|Qwen2.5-1.5B-Instruct|Qwen2.5-3B-Instruct|
